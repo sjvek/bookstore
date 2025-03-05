@@ -33,7 +33,7 @@ const orderRoutes = require("./routes/order");
 
 const allowedOrigins = [
   "http://localhost:5173", // Local development
-  "https://vermillion-starburst-01d991.netlify.app", // Netlify frontend
+  "astounding-kitsune-252d60.netlify.app", // Netlify frontend
 ];
 
 app.use(
