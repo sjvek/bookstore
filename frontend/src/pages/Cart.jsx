@@ -29,7 +29,7 @@ function Cart() {
       setCart(response.data.data);
     };
     fetch();
-  }, [Cart]);
+  }, []);
 
   const deletItem = async (bookid) => {
     const response = await axios.put(
