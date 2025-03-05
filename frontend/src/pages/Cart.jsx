@@ -23,7 +23,7 @@ function Cart() {
   useEffect(() => {
     const fetch = async () => {
       const response = await axios.get(
-        "http://localhost:3001/api/v1/get-user-cart",
+        "https://bookstore-yqad.onrender.com/api/v1/get-user-cart",
         { headers }
       );
       setCart(response.data.data);
