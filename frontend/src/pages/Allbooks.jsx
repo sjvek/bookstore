@@ -31,7 +31,7 @@ const Allbooks = () => {
           <Loader />
         </div>
       )}
-      <div className="row gap-3 border w-100 ">
+      <div className="row gap-3 h-auto w-100 ">
         {Data &&
           Data.map((items, i) => (
             <div
