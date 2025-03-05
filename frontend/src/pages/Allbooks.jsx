@@ -13,7 +13,7 @@ const Allbooks = () => {
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(
-        "http://localhost:3001/api/v1/get-all-book"
+        "https://bookstore-yqad.onrender.com/api/v1/get-all-book"
       );
       // console.log(response.data.data);
       setData(response.data.data);
@@ -23,7 +23,7 @@ const Allbooks = () => {
   }, []);
 
   return (
-    <div className='bg-dark h-auto  p-5 w-100 '>
+    <div className='bg-dark vh-auto  p-5 w-100 '>
       <br />
       <h1 className='text-light mx-5 mb-5' >All books</h1>
       {!Data && (

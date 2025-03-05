@@ -15,7 +15,7 @@ const headers = {
 }
 
 const handleunfav = async () => {
-const response = await axios.put("http://localhost:3001/api/v1/remove-book-to-favourite" ,{}, {headers});
+const response = await axios.put("https://bookstore-yqad.onrender.com/api/v1/remove-book-to-favourite" ,{}, {headers});
 alert(response.data.message);
 };
 

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Navbar from "../components/navbar/Navbar";
-import Footer from "../components/footer";
+
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
@@ -32,7 +31,7 @@ function Signup() {
         alert("all input required");
       } else {
         const response = await axios.post(
-          "http://localhost:3001/api/v1/signup",
+          "https://bookstore-yqad.onrender.com/api/v1/signup",
           Values
         );
         alert(response.data.message);

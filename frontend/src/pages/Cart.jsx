@@ -33,7 +33,7 @@ function Cart() {
 
   const deletItem = async (bookid) => {
     const response = await axios.put(
-      `http://localhost:3001/api/v1/remove-to-cart/${bookid}`,
+      `https://bookstore-yqad.onrender.com/api/v1/remove-to-cart/${bookid}`,
       {},
       { headers }
     );
@@ -53,7 +53,7 @@ function Cart() {
 
   const PlaceOrder = async () => {
       const response = await axios.post(
-        "http://localhost:3001/api/v1/place-order",
+        "https://bookstore-yqad.onrender.com/api/v1/place-order",
         { order: Cart },
         { headers }
       );
