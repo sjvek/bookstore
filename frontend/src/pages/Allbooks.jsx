@@ -23,7 +23,7 @@ const Allbooks = () => {
   }, []);
 
   return (
-    <div className='bg-dark vh-auto  p-5 w-100 '>
+    <div className='bg-dark vh-100  p-5 w-100 '>
       <br />
       <h1 className='text-light mx-5 mb-5' >All books</h1>
       {!Data && (

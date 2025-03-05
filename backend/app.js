@@ -24,12 +24,30 @@ const favRoutes = require("./routes/favourite");
 const cartRoutes = require("./routes/cart");
 const orderRoutes = require("./routes/order");
 
-app.use(cors({ 
-    origin: "http://localhost:5173", // Allow frontend to access backend
-    credentials: true // Allow cookies if authentication uses sessions
-  }
+// app.use(cors({ 
+//     origin: "http://localhost:5173", // Allow frontend to access backend
+//     credentials: true // Allow cookies if authentication uses sessions
+//   }
 
-));
+// ));
+
+const allowedOrigins = [
+  "http://localhost:5173", // Local development
+  "https://vermillion-starburst-01d991.netlify.app", // Netlify frontend
+];
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true, // Allow cookies if using authentication
+  })
+);
 
 // Use Routes
 app.use("/api/v1",userRoutes);   
