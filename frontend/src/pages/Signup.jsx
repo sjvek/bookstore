@@ -77,7 +77,7 @@ function Signup() {
       // If signup is successful, navigate to the login page
       if (response.data.success) {
         alert(response.data.message);
-        navigate("/login");
+      //  navigate("/login");
       } else {
         // Stay on the signup page if there’s an issue
         alert(response.data.message || "Signup failed, please try again.");
