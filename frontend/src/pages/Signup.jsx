@@ -36,10 +36,13 @@ function Signup() {
           Values
         );
        // alert(response.data.message);
-       console.log(response.data);
+       console.log(response.data.success);
+      
 
       //--------------
       if (response.data.success) {
+       // console.log(response.data);
+
         alert(response.data.message);
         navigate("/login");
       } else {

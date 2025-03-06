@@ -51,7 +51,7 @@ router.post("/signup", async (req, res) => {
         });
 
         await newUser.save();
-        res.status(200).json({ message: "sign up successfully" });
+        res.status(200).json({ success: true, message: "Sign up successfully" });
 
 
 
