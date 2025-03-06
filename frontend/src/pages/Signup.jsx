@@ -36,6 +36,8 @@ function Signup() {
           Values
         );
        // alert(response.data.message);
+       console.log(response.data);
+
       //--------------
       if (response.data.success) {
         alert(response.data.message);
