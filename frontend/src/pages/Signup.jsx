@@ -76,6 +76,7 @@ function Signup() {
   
       // If signup is successful, navigate to the login page
       if (response.data.success) {
+        console.log(response.data);
         alert(response.data.message);
       //  navigate("/login");
       } else {
