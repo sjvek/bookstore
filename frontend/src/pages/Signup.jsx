@@ -76,9 +76,9 @@ function Signup() {
   
       // If signup is successful, navigate to the login page
       if (response.data.success) {
-        console.log(response.data);
+       // console.log(response.data);
         alert(response.data.message);
-      //  navigate("/login");
+        navigate("/login");
       } else {
         // Stay on the signup page if there’s an issue
         alert(response.data.message || "Signup failed, please try again.");
@@ -154,14 +154,10 @@ function Signup() {
                 <label htmlFor="address">Address</label>
               </div>
               <div className="d-grid">
-                <Link
-                  to="/login"
-                  type="submit"
-                  className="btn btn-primary btn-lg"
-                  onClick={submit}
-                >
-                  Sign up
-                </Link>
+              <button type="button" className="btn btn-primary btn-lg" onClick={submit}>
+  Sign up
+</button>
+
               </div>
             </form>
             <h5 className="my-4 text-center text-light">or</h5>
