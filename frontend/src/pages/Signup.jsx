@@ -29,13 +29,24 @@ function Signup() {
       ) {
         alert("all input required");
       } else {
-        const response = await axios.post(
+      
+            const response = await axios.post(
           "https://bookstore-yqad.onrender.com/api/v1/signup",
           Values
         );
+       // alert(response.data.message);
+      //--------------
+      if (response.data.success) {
         alert(response.data.message);
-       // console-log(response.data);
         navigate("/login");
+      } else {
+        // Stay on the signup page if there’s an issue
+        alert(response.data.message || "Signup failed, please try again.");
+      }
+      //-------------
+      
+       // console-log(response.data);
+       // navigate("/login");
       }
     } catch (error) {
       //console.log(error);
