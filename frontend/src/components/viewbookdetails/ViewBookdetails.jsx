@@ -9,10 +9,11 @@ import { IoCart } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import { MdModeEditOutline } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
+import { ToastContainer, toast } from 'react-toastify'; 
+import "react-toastify/dist/ReactToastify.css"; 
 
 const ViewBookdetails = () => {
   const { id } = useParams();
-  //console.log(id);
   const [Data, setData] = useState();
 
   const isLoggedin = useSelector((state) => state.auth.isLoggedin);
@@ -20,40 +21,59 @@ const ViewBookdetails = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get(
-        `https://bookstore-yqad.onrender.com/api/v1/get-book-by-id/${id}`
-      );
-     // console.log(response);
-      setData(response.data.data);
+      try {
+        const response = await axios.get(
+          `https://bookstore-yqad.onrender.com/api/v1/get-book-by-id/${id}`
+        );
+        setData(response.data.data);
+      } catch (error) {
+        toast.error("Error loading book details!");
+      }
     };
     fetchData();
-  }, []);
+  }, [id]);
 
   const headers = {
     id: localStorage.getItem("id"),
-    authorization:`Bearer ${localStorage.getItem("token")}`,
-    bookid : id,
-  }
-  const handelFavourite = async() => {
-    const response = await axios.put("https://bookstore-yqad.onrender.com/api/v1/add-book-to-favourite",{},{headers});
-    alert(response.data.message);
-  }
+    authorization: `Bearer ${localStorage.getItem("token")}`,
+    bookid: id,
+  };
 
-    const handelCart = async() => {
-      const response = await axios.put("https://bookstore-yqad.onrender.com/api/v1/add-to-cart",{},{headers});
-      alert(response.data.message);
+  const handelFavourite = async () => {
+    try {
+      const response = await axios.put(
+        "https://bookstore-yqad.onrender.com/api/v1/add-book-to-favourite",
+        {},
+        { headers }
+      );
+      toast.success(response.data.message); 
+    } catch (error) {
+      toast.error("Failed to add to favourites!"); 
     }
+  };
+
+  const handelCart = async () => {
+    try {
+      const response = await axios.put(
+        "https://bookstore-yqad.onrender.com/api/v1/add-to-cart",
+        {},
+        { headers }
+      );
+      toast.success(response.data.message); 
+    } catch (error) {
+      toast.error("Failed to add to cart!"); 
+    }
+  };
 
   return (
     <>
       {Data && (
-        <div className="d-flex row gap-5 bg-dark p-5 align-items-center justify-content-evenly ">
-          <div className="col-lg-4 col-md-6 p-5 justify-content-end d-flex  ">
-            {/* <img src={Data.url} alt="/" className="img-fluid"/>   */}
+        <div className="d-flex row gap-5 bg-dark p-5 align-items-center justify-content-evenly">
+          <div className="col-lg-4 col-md-6 p-5 justify-content-end d-flex">
             <img
               src={Data.url}
               alt="/"
-              className="img-fluid p-2 shadow-sm "
+              className="img-fluid p-2 shadow-sm"
               style={{
                 height: "60%",
                 objectFit: "contain",
@@ -61,8 +81,8 @@ const ViewBookdetails = () => {
               }}
             />
           </div>
-          <div className=" col-lg-6 col-md-6   align-items-center justify-content-start">
-            <h1 className="text-warning ">{Data.title}</h1>
+          <div className="col-lg-6 col-md-6 align-items-center justify-content-start">
+            <h1 className="text-warning">{Data.title}</h1>
             <p className="text-light">{Data.author}</p>
             <p className="text-light">{Data.desc}</p>
             <p className="text-light">
@@ -81,37 +101,34 @@ const ViewBookdetails = () => {
             </p>
             <p className="text-warning">Price : ₹ {Data.price} </p>
 
-            {isLoggedin === true &&  role === "user" && (
-                  <div class="d-grid gap-3 col-3 mt-5">
-                    <button className="btn btn-outline-warning" type="button" onClick={handelFavourite}>
-                      <FaHeart /> Favourites
-                    </button>
-                    <button className="btn btn-outline-warning" type="button" onClick={handelCart}>
-                      <IoCart /> Add to Cart
-                    </button>
-                  </div>
-                )}
+            {isLoggedin === true && role === "user" && (
+              <div className="d-grid gap-3 col-3 mt-5">
+                <button className="btn btn-outline-warning" type="button" onClick={handelFavourite}>
+                  <FaHeart /> Favourites
+                </button>
+                <button className="btn btn-outline-warning" type="button" onClick={handelCart}>
+                  <IoCart /> Add to Cart
+                </button>
+              </div>
+            )}
 
-
-{isLoggedin === true &&  role === "admin" && (
-                  <div class="d-grid gap-2 d-md-block mt-5">
-                    <button className="btn btn-outline-warning" type="button">
-                    <MdModeEditOutline /> Edit
-                    </button>
-                    <button className="btn btn-outline-warning" type="button">
-                    <MdDelete /> Delete Book
-                    </button>
-                  </div>
-                )}
-
+            {isLoggedin === true && role === "admin" && (
+              <div className="d-grid gap-2 d-md-block mt-5">
+                <button className="btn btn-outline-warning" type="button">
+                  <MdModeEditOutline /> Edit
+                </button>
+                <button className="btn btn-outline-warning" type="button">
+                  <MdDelete /> Delete Book
+                </button>
+              </div>
+            )}
           </div>
         </div>
       )}
-      {!Data && (
-        <div>
-          <Loader />
-        </div>
-      )}
+
+      {!Data && <Loader />}
+
+      <ToastContainer />
     </>
   );
 };
