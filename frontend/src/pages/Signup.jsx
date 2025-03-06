@@ -57,28 +57,29 @@ function Signup() {
 
   const submit = async () => {
     try {
-      // Validation check
+      // Validation check: Ensure all fields are filled
       if (
-        Values.username === "" ||
-        Values.email === "" ||
-        Values.password === "" ||
-        Values.address === ""
+        !Values.username.trim() ||
+        !Values.email.trim() ||
+        !Values.password.trim() ||
+        !Values.address.trim()
       ) {
         alert("All input required");
         return; // Stop execution if validation fails
       }
   
-      // API call
+      // Make API call
       const response = await axios.post(
         "https://bookstore-yqad.onrender.com/api/v1/signup",
         Values
       );
   
-      // Check API response success
+      // If signup is successful, navigate to the login page
       if (response.data.success) {
         alert(response.data.message);
         navigate("/login");
       } else {
+        // Stay on the signup page if there’s an issue
         alert(response.data.message || "Signup failed, please try again.");
       }
   
@@ -86,6 +87,7 @@ function Signup() {
       alert(error.response?.data?.message || "An error occurred. Please try again.");
     }
   };
+  
   
   return (
     <>
