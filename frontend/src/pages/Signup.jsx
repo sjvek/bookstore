@@ -56,7 +56,7 @@ function Signup() {
   // };
 
   const submit = async () => {
-    event.preventDefault();
+    Event.preventDefault();
     try {
       // Validation check: Ensure all fields are filled
       if (
