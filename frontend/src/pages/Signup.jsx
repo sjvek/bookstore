@@ -251,12 +251,10 @@ function Signup() {
         Values
       );
 
-      console.log("Full Response:", response); // Log full response
-      console.log("Response Data:", response.data); // Log data part
-
       // Check the response from the server
       if (response.data.success) {
-        toast.success(response.data.message);
+        toast.error(response.data.message);
+        alert(response.data.message);  // Display success message
         navigate("/login");
       } else {
         toast.error(response.data.message || "Signup failed, please try again.");
@@ -353,3 +351,4 @@ function Signup() {
 }
 
 export default Signup;
+
