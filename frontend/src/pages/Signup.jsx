@@ -19,76 +19,76 @@ function Signup() {
     setValues({ ...Values, [name]: value });
   };
 
-  // const submit = async () => {
-  //   try {
-  //     if (
-  //       Values.username === "" ||
-  //       Values.email === "" ||
-  //       Values.password === "" ||
-  //       Values.address === ""
-  //     ) {
-  //       alert("all input required");
-  //       return;
-  //     } else {
-      
-  //           const response = await axios.post(
-  //         "https://bookstore-yqad.onrender.com/api/v1/signup",
-  //         Values
-  //       );
-  //      // alert(response.data.message);
-  //     //--------------
-  //     if (response.data.success) {
-  //       alert(response.data.message);
-  //       navigate("/login");
-  //     } else {
-  //       // Stay on the signup page if there’s an issue
-  //       alert(response.data.message || "Signup failed, please try again.");
-  //     }
-  //     //-------------
-      
-  //      // console-log(response.data);
-  //      // navigate("/login");
-  //     }
-  //   } catch (error) {
-  //     //console.log(error);
-  //     alert(error.response.data.message);
-  //   }
-  // };
-
   const submit = async () => {
-    Event.preventDefault();
     try {
-      // Validation check: Ensure all fields are filled
       if (
-        !Values.username.trim() ||
-        !Values.email.trim() ||
-        !Values.password.trim() ||
-        !Values.address.trim()
+        Values.username === "" ||
+        Values.email === "" ||
+        Values.password === "" ||
+        Values.address === ""
       ) {
-        alert("All input required");
-        return; // Stop execution if validation fails
-      }
-  
-      // Make API call
-      const response = await axios.post(
-        "https://bookstore-yqad.onrender.com/api/v1/signup",
-        Values
-      );
-  
-      // If signup is successful, navigate to the login page
+        alert("all input required");
+        return;
+      } else {
+      
+            const response = await axios.post(
+          "https://bookstore-yqad.onrender.com/api/v1/signup",
+          Values
+        );
+       // alert(response.data.message);
+      //--------------
       if (response.data.success) {
-       // console.log(response.data);
         alert(response.data.message);
         navigate("/login");
       } else {
         // Stay on the signup page if there’s an issue
         alert(response.data.message || "Signup failed, please try again.");
       }
-  
+      //-------------
+      
+       // console-log(response.data);
+       // navigate("/login");
+      }
     } catch (error) {
-      alert(error.response?.data?.message || "An error occurred. Please try again.");
+      //console.log(error);
+      alert(error.response.data.message);
     }
   };
+
+  // const submit = async () => {
+ 
+  //   try {
+  //     // Validation check: Ensure all fields are filled
+  //     if (
+  //       !Values.username.trim() ||
+  //       !Values.email.trim() ||
+  //       !Values.password.trim() ||
+  //       !Values.address.trim()
+  //     ) {
+  //       alert("All input required");
+  //       return; // Stop execution if validation fails
+  //     }
+  
+  //     // Make API call
+  //     const response = await axios.post(
+  //       "https://bookstore-yqad.onrender.com/api/v1/signup",
+  //       Values
+  //     );
+  
+  //     // If signup is successful, navigate to the login page
+  //     if (response.data.success) {
+  //      // console.log(response.data);
+  //       alert(response.data.message);
+  //       navigate("/login");
+  //     } else {
+  //       // Stay on the signup page if there’s an issue
+  //       alert(response.data.message || "Signup failed, please try again.");
+  //     }
+  
+  //   } catch (error) {
+  //     alert(error.response?.data?.message || "An error occurred. Please try again.");
+  //   }
+  // };
   
   
   return (
