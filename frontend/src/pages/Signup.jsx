@@ -19,46 +19,46 @@ function Signup() {
     setValues({ ...Values, [name]: value });
   };
 
-  const submit = async () => {
-    try {
-      if (
-        Values.username === "" ||
-        Values.email === "" ||
-        Values.password === "" ||
-        Values.address === ""
-      ) {
-        alert("all input required");
-        return;
-      } else {
+  // const submit = async () => {
+  //   try {
+  //     if (
+  //       Values.username === "" ||
+  //       Values.email === "" ||
+  //       Values.password === "" ||
+  //       Values.address === ""
+  //     ) {
+  //       alert("all input required");
+  //       return;
+  //     } else {
       
-            const response = await axios.post(
-          "https://bookstore-yqad.onrender.com/api/v1/signup",
-          Values
-        );
-       // alert(response.data.message);
-       console.log(response.data.success);
+  //           const response = await axios.post(
+  //         "https://bookstore-yqad.onrender.com/api/v1/signup",
+  //         Values
+  //       );
+  //      // alert(response.data.message);
+  //      console.log(response.data.success);
       
 
-      //--------------
-      if (response.data.success) {
-       // console.log(response.data);
+  //     //--------------
+  //     if (response.data.success) {
+  //      // console.log(response.data);
 
-        alert(response.data.message);
-        navigate("/login");
-      } else {
-        // Stay on the signup page if there’s an issue
-        alert(response.data.message || "Signup failed, please try again.");
-      }
-      //-------------
+  //       alert(response.data.message);
+  //       navigate("/login");
+  //     } else {
+  //       // Stay on the signup page if there’s an issue
+  //       alert(response.data.message || "Signup failed, please try again.");
+  //     }
+  //     //-------------
       
-       // console-log(response.data);
-       // navigate("/login");
-      }
-    } catch (error) {
-      //console.log(error);
-      alert(error.response.data.message);
-    }
-  };
+  //      // console-log(response.data);
+  //      // navigate("/login");
+  //     }
+  //   } catch (error) {
+  //     //console.log(error);
+  //     alert(error.response.data.message);
+  //   }
+  // };
 
   // const submit = async () => {
  
@@ -94,6 +94,33 @@ function Signup() {
   //     alert(error.response?.data?.message || "An error occurred. Please try again.");
   //   }
   // };
+  
+  const submit = async () => {
+    try {
+      if (!Values.username || !Values.email || !Values.password || !Values.address) {
+        alert("All fields are required");
+        return;
+      }
+  
+      const response = await axios.post(
+        "https://bookstore-yqad.onrender.com/api/v1/signup",
+        Values
+      );
+  
+      console.log("Full Response:", response); // Log full response
+      console.log("Response Data:", response.data); // Log data part
+  
+      if (response.data.success) {
+        alert(response.data.message);
+        navigate("/login");
+      } else {
+        alert(response.data.message || "Signup failed, please try again.");
+      }
+    } catch (error) {
+      console.error("Error:", error); // Log full error
+      alert(error.response?.data?.message || "An error occurred. Please try again.");
+    }
+  };
   
   
   return (
